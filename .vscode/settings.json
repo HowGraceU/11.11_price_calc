@@ -1,0 +1,27 @@
+{
+	"eslint.options": {
+		"configFile": "D:\\html\\git\\11.11_price_calc\\.eslintrc.js"
+	},
+	"eslint.validate": [
+		"javascript",
+		{
+			"language": "vue",
+			"autoFix": true
+		},
+		{
+			"language": "typescript",
+			"autoFix": true
+		},
+		{
+			"language": "typescriptreact",
+			"autoFix": true
+		},
+		{
+			"language": "javascriptreact",
+			"autoFix": true
+		}
+	],
+	"eslint.autoFixOnSave": true,
+	"files.eol": "\t\n",
+	"editor.tabSize": 2
+}

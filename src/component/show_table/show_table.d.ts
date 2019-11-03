@@ -1,0 +1,3 @@
+type ShowTableProps = {
+  ret: calcRet[]
+}

@@ -1,0 +1,16 @@
+.formWrap {
+	margin: 20px;
+	width: 550px;
+	text-align: center;
+}
+
+.button {
+	display: block;
+	margin: 0 auto;
+	width: 400px;
+}
+
+.betweenFlex{
+	display: flex;
+	justify-content: space-between;
+}
