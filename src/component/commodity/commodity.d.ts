@@ -1,4 +1,6 @@
-type commodity = {
+import { WrappedFormUtils } from 'antd/lib/form/Form';
+
+export declare type commodity = {
   id: number,
   name: string,
   price?: number,
@@ -6,14 +8,14 @@ type commodity = {
   discount?: number
 }
 
-type commodityProps = {
+export declare type commodityProps = {
   commoditys: commodity[],
   addCom: Function,
   deleteCom: Function,
   form: WrappedFormUtils
 }
 
-type calcRet = {
+export declare type calcRet = {
   name: string,
   commoditySum: number,
   allowacneDiscount: number,

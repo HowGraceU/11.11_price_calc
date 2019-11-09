@@ -31,7 +31,7 @@ module.exports = {
 	},
 	rules: {
 		"react/jsx-filename-extension": [1, {
-			"extensions": [".tsx", ".jsx", "ts"]
+			"extensions": [".tsx", ".jsx", ".d.ts", ".ts"]
 		}],
 		"react/static-property-placement": [0],
 		"max-len": [0],

@@ -14,3 +14,12 @@
 	display: flex;
 	justify-content: space-between;
 }
+
+.calcWarp {
+	min-width: 600px;
+	max-width: 1100px;
+}
+
+.mr{
+	margin-right: 10px;
+}

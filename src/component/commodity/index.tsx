@@ -4,6 +4,7 @@ import {
   Form, Input, Icon, Button,
 } from 'antd';
 
+import { commodityProps } from './commodity';
 import * as styles from './index.css';
 
 let id : number = 1;

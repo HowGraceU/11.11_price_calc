@@ -84,7 +84,7 @@ module.exports = {
     // new BundleAnalyzerPlugin(),
   ],
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    extensions: ['.js', '.jsx', '.d.ts', '.ts', '.tsx'],
   },
   resolveLoader: {
     modules: [

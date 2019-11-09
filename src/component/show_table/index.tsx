@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import { Table } from 'antd';
 
+import { ShowTableProps } from './show_table';
+import * as styles from './index.css';
+
 // todos: move to utils
 function toFix2(num:number): number {
   return Math.round(num * 100) / 100;
@@ -56,7 +59,7 @@ const ShowTable: React.SFC<ShowTableProps> = (props) => {
   });
   data.push(total);
 
-  return <Table columns={columns} dataSource={data} />;
+  return <Table className={styles.mt} columns={columns} dataSource={data} />;
 };
 
 
