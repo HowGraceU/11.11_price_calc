@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import {
   Form,
   Input,
@@ -6,7 +6,7 @@ import {
 } from 'antd';
 import PropTypes from 'prop-types';
 
-import { commodity, calcRet } from '../commodity/commodity';
+import { commodity, calcRet, History } from '../commodity/commodity';
 
 import * as styles from './index.css';
 import Commodity from '../commodity';
@@ -20,6 +20,31 @@ function toFix2(num:number): number {
 function ProceCalc(props) {
   const { form } = props;
   const { getFieldDecorator, getFieldValue, setFieldsValue } = form;
+
+  const history = useRef<History>({
+    current: -1,
+    historyState: [],
+    goForward: () => {
+      const { historyState, current } = history.current;
+
+      const formData = historyState[current - 1];
+      history.current.current = current - 1;
+
+      setFieldsValue(formData);
+
+      calcPrice(false);
+    },
+    goNext: () => {
+      const { historyState, current } = history.current;
+
+      const formData = historyState[current + 1];
+      history.current.current = current + 1;
+
+      setFieldsValue(formData);
+
+      calcPrice(false);
+    },
+  });
 
   const [ret, setRet] = useState<calcRet[]>([]);
 
@@ -44,7 +69,7 @@ function ProceCalc(props) {
     setFieldsValue({ commoditys: nowCommoditys.filter(({ id }) => id !== commodityId) });
   }, [commoditys]);
 
-  const calcPrice = useCallback(() => {
+  const calcPrice = useCallback((save = true) => {
     const formData = form.getFieldsValue();
     const {
       allowance_full: allowanceFull = 400, allowance_reduction: allowanceReduction = 50, allowance_num: allowanceNum = 1, store_full: storeFull = 0, store_reduction: storeReduction = 0, commoditys: nowCommoditys,
@@ -76,6 +101,10 @@ function ProceCalc(props) {
     });
 
     setRet(commodityPay);
+
+    if (save) {
+      history.current.current = history.current.historyState.push(formData) - 1;
+    }
   }, []);
 
   const [formDatas, setFormDatas] = useState<[]>(JSON.parse(localStorage.getItem('formData') || '[]'));
@@ -168,8 +197,8 @@ function ProceCalc(props) {
         <StorageList formDatas={formDatas} showData={showData} delData={delData} />
       </Form>
       <div className={styles.formWrap}>
-        <Button type="primary" htmlType="submit" className={styles.mr} onClick={calcPrice}>上一单</Button>
-        <Button type="primary" htmlType="submit" className={styles.mr} onClick={calcPrice}>下一单</Button>
+        <Button type="primary" htmlType="submit" className={styles.mr} disabled={history.current.current <= 0} onClick={history.current.goForward}>上一单</Button>
+        <Button type="primary" htmlType="submit" className={styles.mr} disabled={history.current.current + 1 >= history.current.historyState.length} onClick={history.current.goNext}>下一单</Button>
 
         <ShowTable ret={ret} />
       </div>

@@ -23,3 +23,10 @@ export declare type calcRet = {
   pay: number,
   need?: number,
 }
+
+export declare type History = {
+  current: number,
+  historyState: object[],
+  goForward: () => void,
+  goNext: () => void
+}
